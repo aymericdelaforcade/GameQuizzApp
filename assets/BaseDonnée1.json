@@ -1,0 +1,435 @@
+{
+  "TheLegendOfZeldaBreathOfTheWild": {
+    "Nom simple": "The Legend of Zelda",
+    "Reste du nom": "Breath of the Wild",
+    "Dérivés du nom": "The Legend of Zelda Breath of the Wild",
+    "Date de sortie": "2017-03-03",
+    "Nom du studio": "Nintendo",
+    "Genre": "Action-Adventure",
+    "URL": "https://images.nintendolife.com/screenshots/81288/large.jpg"
+  },
+  "TheWitcher3WildHunt": {
+    "Nom simple": "The Witcher 3",
+    "Reste du nom": "Wild Hunt",
+    "Dérivés du nom": "The Witcher 3 Wild Hunt",
+    "Date de sortie": "2015-05-19",
+    "Nom du studio": "CD Projekt Red",
+    "Genre": "RPG",
+    "URL": "https://static1.dualshockersimages.com/wordpress/wp-content/uploads/2015/04/Witcher3-3.jpg"
+  },
+  "RedDeadRedemption2": {
+    "Nom simple": "Red Dead Redemption",
+    "Reste du nom": "2",
+    "Dérivés du nom": "Red Dead Redemption 2",
+    "Date de sortie": "2018-10-26",
+    "Nom du studio": "Rockstar Games",
+    "Genre": "Action-Adventure",
+    "URL": "https://i.ytimg.com/vi/Ak9lA98lUx4/maxresdefault.jpg"
+  },
+  "GodOfWar": {
+    "Nom simple": "God of War",
+    "Dérivés du nom": "God of War",
+    "Date de sortie": "2018-04-20",
+    "Nom du studio": "Santa Monica Studio",
+    "Genre": "Action-Adventure",
+    "URL": "https://www.gematsu.com/wp-content/uploads/2018/04/GoW_04-02-18.jpg"
+  },
+  "Minecraft": {
+    "Nom simple": "Minecraft",
+    "Dérivés du nom": "Minecraft",
+    "Date de sortie": "2011-11-18",
+    "Nom du studio": "Mojang",
+    "Genre": "Simulation",
+    "URL": "https://images.ctfassets.net/kftzwdyauwt9/ef9fc360-1a5a-4ca3-5c25b83b3564/50c07940455cc86ef84d91526d9cf3e0/vpt.jpg?w=1600&h=900&fit=fill"
+  },
+  "GrandTheftAutoV": {
+    "Nom simple": "Grand Theft Auto",
+    "Reste du nom": "V",
+    "Dérivés du nom": "Grand Theft Auto V",
+    "Date de sortie": "2013-09-17",
+    "Nom du studio": "Rockstar Games",
+    "Genre": "Action-Adventure",
+    "URL": "https://global-img.gamergen.com/gta-v-5-comparatif-xbox-360-ps3-screenshot-015-ps3_0903D4000000391696.jpg"
+  },
+  "Fortnite": {
+    "Nom simple": "Fortnite",
+    "Dérivés du nom": "Fortnite",
+    "Date de sortie": "2017-07-25",
+    "Nom du studio": "Epic Games",
+    "Genre": "TPS",
+    "URL": "https://i.redd.it/2yco0ehwv6981.jpg"
+  },
+  "DarkSoulsIII": {
+    "Nom simple": "Dark Souls",
+    "Reste du nom": "III",
+    "Dérivés du nom": "Dark Souls III",
+    "Date de sortie": "2016-03-24",
+    "Nom du studio": "FromSoftware",
+    "Genre": "RPG",
+    "URL": "https://www.newgamenetwork.com/images/uploads/gallery/DarkSouls3/ds3_09.jpg"
+  },
+  "Overwatch": {
+    "Nom simple": "Overwatch",
+    "Dérivés du nom": "Overwatch",
+    "Date de sortie": "2016-05-24",
+    "Nom du studio": "Blizzard Entertainment",
+    "Genre": "FPS",
+    "URL": "https://www.newgamenetwork.com/images/uploads/gallery/Overwatch/overwatch_01.jpg"
+  },
+  "Persona5": {
+    "Nom simple": "Persona",
+    "Reste du nom": "5",
+    "Dérivés du nom": "Persona 5",
+    "Date de sortie": "2016-09-15",
+    "Nom du studio": "Atlus",
+    "Genre": "RPG",
+    "URL": "https://www.rpgfan.com/wp-content/uploads/2020/06/Persona-5-Royal-Screenshot-162.jpg"
+  },
+  "HorizonZeroDawn": {
+    "Nom simple": "Horizon Zero Dawn",
+    "Dérivés du nom": "Horizon Zero Dawn",
+    "Date de sortie": "2017-02-28",
+    "Nom du studio": "Guerrilla Games",
+    "Genre": "Action-Adventure",
+    "URL": "https://www.newgamenetwork.com/images/uploads/gallery/HorizonZD/hzd_13.jpg"
+  },
+  "TheElderScrollsVSkyrim": {
+    "Nom simple": "The Elder Scrolls V",
+    "Reste du nom": "Skyrim",
+    "Dérivés du nom": "The Elder Scrolls V Skyrim",
+    "Date de sortie": "2011-11-11",
+    "Nom du studio": "Bethesda Game Studios",
+    "Genre": "RPG",
+    "URL": "https://www.rpgfan.com/wp-content/uploads/2020/07/The-Elder-Scrolls-V-Skyrim-Screenshot-034.jpg"
+  },
+  "Cyberpunk2077": {
+    "Nom simple": "Cyberpunk",
+    "Reste du nom": "2077",
+    "Dérivés du nom": "Cyberpunk 2077",
+    "Date de sortie": "2020-12-10",
+    "Nom du studio": "CD Projekt Red",
+    "Genre": "RPG",
+    "URL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXoK6b5cNTR86BoIGWzBEEnsVqGpt6YEecBg&s"
+  },
+  "Bloodborne": {
+    "Nom simple": "Bloodborne",
+    "Dérivés du nom": "Bloodborne",
+    "Date de sortie": "2015-03-24",
+    "Nom du studio": "FromSoftware",
+    "Genre": "RPG",
+    "URL": "https://www.gamereactor.eu/media/14/newscreenshotsbloodborne_1411414b.jpg"
+  },
+
+  "HaloCombatEvolved": {
+    "Nom simple": "Halo",
+    "Reste du nom": "Combat Evolved",
+    "Dérivés du nom": "Halo Combat Evolved",
+    "Date de sortie": "2001-11-15",
+    "Nom du studio": "Bungie",
+    "Genre": "FPS",
+    "URL": "https://www.halo.fr/wp-content/uploads/2016/02/Halo-CE-Anniversary-screenshot-halo-34030702-1280-720-1-e1454530834622.jpg"
+  },
+  "SuperMarioOdyssey": {
+    "Nom simple": "Super Mario",
+    "Reste du nom": "Odyssey",
+    "Dérivés du nom": "Super Mario Odyssey",
+    "Date de sortie": "2017-10-27",
+    "Nom du studio": "Nintendo",
+    "Genre": "\"Platformer\",",
+    "URL": "https://dailygame.at/wp-content/uploads/2017/10/3_NintendoSwitch_SuperMarioOdysee_Screenshots_SuperMarioOdyssey_Presentation2017_scrn05.jpg"
+  },
+  "TheLastOfUsPartII": {
+    "Nom simple": "The Last of Us",
+    "Reste du nom": "Part II",
+    "Dérivés du nom": "The Last of Us Part II",
+    "Date de sortie": "2020-06-19",
+    "Nom du studio": "Naughty Dog",
+    "Genre": "Action-Adventure",
+    "URL": "https://blog.fr.playstation.com/tachyon/sites/10/2022/08/29bcc3fbd2df12261faef37de7e410eaa4570495-scaled.jpg"
+  },
+  "MetalGearSolidVThePhantomPain": {
+    "Nom simple": "Metal Gear Solid V",
+    "Reste du nom": "The Phantom Pain",
+    "Dérivés du nom": "Metal Gear Solid V The Phantom Pain",
+    "Date de sortie": "2015-09-01",
+    "Nom du studio": "Kojima Productions",
+    "Genre": "Action-Adventure",
+    "URL": "https://www.metalgearinformer.com/wp-content/uploads/2015/08/Metal-Gear-Solid-V-The-Phantom-Pain-Screenshot-Gamescom-2015-11.jpg"
+  },
+  "DOOMEternal": {
+    "Nom simple": "DOOM",
+    "Reste du nom": "Eternal",
+    "Dérivés du nom": "DOOM Eternal",
+    "Date de sortie": "2020-03-20",
+    "Nom du studio": "id Software",
+    "Genre": "FPS",
+    "URL": "https://i.redd.it/hqyd6mbjdun41.png"
+  },
+  "TheSims4": {
+    "Nom simple": "The Sims",
+    "Reste du nom": "4",
+    "Dérivés du nom": "The Sims 4",
+    "Date de sortie": "2014-09-02",
+    "Nom du studio": "Maxis",
+    "Genre": "Simulation",
+    "URL": "https://sherigr.com/wp-content/uploads/2020/05/with-UI.jpg"
+  },
+  "AnimalCrossingNewHorizons": {
+    "Nom simple": "Animal Crossing",
+    "Reste du nom": "New Horizons",
+    "Dérivés du nom": "Animal Crossing New Horizons",
+    "Date de sortie": "2020-03-20",
+    "Nom du studio": "Nintendo",
+    "Genre": "Simulation",
+    "URL": "https://cdn.mos.cms.futurecdn.net/h7tGJmNfgEbwMjwaRmrUJW-1200-80.jpg"
+  },
+  "StardewValley": {
+    "Nom simple": "Stardew Valley",
+    "Dérivés du nom": "Stardew Valley",
+    "Date de sortie": "2016-02-26",
+    "Nom du studio": "ConcernedApe",
+    "Genre": "Simulation",
+    "URL": "https://www.rpgfan.com/wp-content/uploads/2020/07/Stardew-Valley-Screenshot-025.jpg"
+  },
+  "SekiroShadowsDieTwice": {
+    "Nom simple": "Sekiro",
+    "Reste du nom": "Shadows Die Twice",
+    "Dérivés du nom": "Sekiro Shadows Die Twice",
+    "Date de sortie": "2019-03-22",
+    "Nom du studio": "FromSoftware",
+    "Genre": "Action-Adventure",
+    "URL": "https://s01.riotpixels.net/data/eb/e4/ebe4f96e-3795-40b7-919b-c17eab2c461f.jpg/screenshot.sekiro-shadows-die-twice.1920x1080.2019-04-01.69.jpg"
+  },
+  "MassEffect2": {
+    "Nom simple": "Mass Effect",
+    "Reste du nom": "2",
+    "Dérivés du nom": "Mass Effect 2",
+    "Date de sortie": "2010-01-26",
+    "Nom du studio": "BioWare",
+    "Genre": "RPG",
+    "URL": "https://ip.trueachievements.com/remote/www.trueachievements.com/customimages/061012.jpg?width=900"
+  },
+  "FinalFantasyVIIRemake": {
+    "Nom simple": "Final Fantasy VII",
+    "Reste du nom": "Remake",
+    "Dérivés du nom": "Final Fantasy VII Remake",
+    "Date de sortie": "2020-04-10",
+    "Nom du studio": "Square Enix",
+    "Genre": "RPG",
+    "URL": "https://www.rpgfan.com/wp-content/uploads/2020/06/Final-Fantasy-VII-Remake-Screenshot-267.jpg"
+  },
+  "ACValhalla": {
+    "Nom simple": "Assassin's Creed",
+    "Reste du nom": "Valhalla",
+    "Dérivés du nom": "AC Valhalla",
+    "Date de sortie": "2020-11-10",
+    "Nom du studio": "Ubisoft",
+    "Genre": "Action-Adventure",
+    "URL": "https://ubistatic-a.akamaihd.net/0071/Assassins_Creed_Valhalla/000059089_engb_Photo_Mode.jpg"
+  },
+  "GhostofTsushima": {
+    "Nom simple": "Ghost of Tsushima",
+    "Dérivés du nom": "Ghost of Tsushima",
+    "Date de sortie": "2020-07-17",
+    "Nom du studio": "Sucker Punch Productions",
+    "Genre": "Action-Adventure",
+    "URL": "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2020/07/ghost-of-tsushima-jin-horse-mountains.jpg"
+  },
+  "ResidentEvil2": {
+    "Nom simple": "Resident Evil",
+    "Reste du nom": "2",
+    "Dérivés du nom": "Resident Evil 2",
+    "Date de sortie": "2019-01-25",
+    "Nom du studio": "Capcom",
+    "Genre": "Action-Adventure",
+    "URL": "https://www.newgamenetwork.com/images/uploads/gallery/re2/re2_05.jpg"
+  },
+  "HalfLifeAlyx": {
+    "Nom simple": "Half-Life",
+    "Reste du nom": "Alyx",
+    "Dérivés du nom": "Half-Life Alyx",
+    "Date de sortie": "2020-03-23",
+    "Nom du studio": "Valve",
+    "Genre": "\"FPS\",",
+    "URL": "https://www.roadtovr.com/wp-content/uploads/2019/11/half-life-alyx-2.jpg"
+  },
+  "Uncharted4AThiefsEnd": {
+    "Nom simple": "Uncharted 4",
+    "Reste du nom": "A Thief's End",
+    "Dérivés du nom": "Uncharted 4 A Thief End; Uncharted 4 A Thief's End",
+    "Date de sortie": "2016-05-10",
+    "Nom du studio": "Naughty Dog",
+    "Genre": "Action-Adventure",
+    "URL": "https://149367133.v2.pressablecdn.com/wp-content/uploads/2017/08/Uncharted-into-western-ghats.jpg"
+  },
+  "Celeste": {
+    "Nom simple": "Celeste",
+    "Dérivés du nom": "Celeste",
+    "Date de sortie": "2018-01-25",
+    "Nom du studio": "Maddy Makes Games",
+    "Genre": "Platformer",
+    "URL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC5LGYxfUdYPHDGjZVayp-Cwz4EdkqJNwmxg&s"
+  },
+  "Hades": {
+    "Nom simple": "Hades",
+    "Dérivés du nom": "Hades",
+    "Date de sortie": "2020-09-17",
+    "Nom du studio": "Supergiant Games",
+    "Genre": "RPG",
+    "URL": "https://sm.ign.com/t/ign_fr/gallery/h/hades-scre/hades-screenshots_mh7f.1080.jpg"
+  },
+  "AmongUs": {
+    "Nom simple": "Among Us",
+    "Dérivés du nom": "Among Us",
+    "Date de sortie": "2018-06-15",
+    "Nom du studio": "InnerSloth",
+    "Genre": "Party",
+    "URL": "https://gameranx.com/wp-content/uploads/2021/04/Among-Us.jpg"
+  },
+  "Cuphead": {
+    "Nom simple": "Cuphead",
+    "Dérivés du nom": "Cuphead",
+    "Date de sortie": "2017-09-29",
+    "Nom du studio": "Studio MDHR",
+    "Genre": "Platformer",
+    "URL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNGvvkfsnghtiLv-Hy0bD7hHcrVPZlpBCe4Q&s"
+  },
+  "Control": {
+    "Nom simple": "Control",
+    "Dérivés du nom": "Control",
+    "Date de sortie": "2019-08-27",
+    "Nom du studio": "Remedy Entertainment",
+    "Genre": "Action-Adventure",
+    "URL": "https://i.redd.it/5bs7l6qw1bd71.png"
+  },
+  "FallGuysUltimateKnockout": {
+    "Nom simple": "Fall Guys",
+    "Reste du nom": "Ultimate Knockout",
+    "Dérivés du nom": "Fall Guys Ultimate Knockout",
+    "Date de sortie": "2020-08-04",
+    "Nom du studio": "Mediatonic",
+    "Genre": "Party",
+    "URL": "https://s01.riotpixels.net/data/2f/35/2f356d40-b34b-458e-81dc-b0a2fc64fb15.jpg/screenshot.fall-guys-ultimate-knockout.1920x1080.2020-07-12.26.jpg"
+  },
+  "MonsterHunterWorld": {
+    "Nom simple": "Monster Hunter",
+    "Reste du nom": "World",
+    "Dérivés du nom": "Monster Hunter World",
+    "Date de sortie": "2018-01-26",
+    "Nom du studio": "Capcom",
+    "Genre": "RPG",
+    "URL": "https://www.newgamenetwork.com/images/uploads/gallery/MonsterHunterWorld/mhw_16.jpg"
+  },
+  "DeathStranding": {
+    "Nom simple": "Death Stranding",
+    "Dérivés du nom": "Death Stranding",
+    "Date de sortie": "2019-11-08",
+    "Nom du studio": "Kojima Productions",
+    "Genre": "Action-Adventure",
+    "URL": "https://interfaceingame.com/wp-content/uploads/death-stranding/death-stranding-photo-mode.png"
+  },
+  "Portal2": {
+    "Nom simple": "Portal",
+    "Reste du nom": "2",
+    "Dérivés du nom": "Portal 2",
+    "Date de sortie": "2011-04-19",
+    "Nom du studio": "Valve",
+    "Genre": "Puzzle",
+    "URL": "https://www.newgamenetwork.com/images/uploads/gallery/Portal2/portal2_pc_05.jpg"
+  },
+  "Tetris": {
+    "Nom simple": "Tetris",
+    "Dérivés du nom": "Tetris",
+    "Date de sortie": "1984-06-06",
+    "Nom du studio": "Alexey Pajitnov",
+    "Genre": "Puzzle",
+    "URL": "https://i.pinimg.com/originals/5d/6c/bb/5d6cbbd44170ee57e20e2a4558b189eb.jpg"
+  },
+  "LeagueOfLegends": {
+    "Nom simple": "League of Legends",
+    "Dérivés du nom": "League of Legends",
+    "Date de sortie": "2009-10-27",
+    "Nom du studio": "Riot Games",
+    "Genre": "MOBA",
+    "URL": "https://www.researchgate.net/publication/343696773/figure/fig1/AS:925549996298245@1597679723345/Screenshot-of-League-of-Legends-LoL-affords-a-variety-of-ways-for-players-to-express.png"
+  },
+  "Dota2": {
+    "Nom simple": "Dota",
+    "Reste du nom": "2",
+    "Dérivés du nom": "Dota 2",
+    "Date de sortie": "2013-07-09",
+    "Nom du studio": "Valve",
+    "Genre": "MOBA",
+    "URL": "https://www.gamingcfg.com/img/9706/Dota-2.jpg"
+  },
+  "WorldOfWarcraft": {
+    "Nom simple": "World of Warcraft",
+    "Dérivés du nom": "World of Warcraft",
+    "Date de sortie": "2004-11-23",
+    "Nom du studio": "Blizzard Entertainment",
+    "Genre": "MMO",
+    "URL": "https://wow.zamimg.com/uploads/blog/images/27324-ameliorations-de-lath-de-linterface-dans-dragonflight.jpg"
+  },
+  "BioShock": {
+    "Nom simple": "BioShock",
+    "Dérivés du nom": "BioShock",
+    "Date de sortie": "2007-08-21",
+    "Nom du studio": "Irrational Games",
+    "Genre": "FPS",
+    "URL": "https://i.redd.it/9t2hyt293vx71.jpg"
+  },
+  "Halo3": {
+    "Nom simple": "Halo",
+    "Reste du nom": "3",
+    "Dérivés du nom": "Halo 3",
+    "Date de sortie": "2007-09-25",
+    "Nom du studio": "Bungie",
+    "Genre": "FPS",
+    "URL": "https://cdn.wccftech.com/wp-content/uploads/2019/03/halo-3-pc-fi.jpg"
+  },
+  "TheLastOfUs": {
+    "Nom simple": "The Last of Us",
+    "Dérivés du nom": "The Last of Us",
+    "Date de sortie": "2013-06-14",
+    "Nom du studio": "Naughty Dog",
+    "Genre": "Action-Adventure",
+    "URL": "https://www.newgamenetwork.com/images/uploads/gallery/LastOfUs2/tlou2_04.jpg"
+  },
+  "SuperSmashBrosUltimate": {
+    "Nom simple": "Super Smash Bros.",
+    "Reste du nom": "Ultimate",
+    "Dérivés du nom": "Super Smash Bros. Ultimate",
+    "Date de sortie": "2018-12-07",
+    "Nom du studio": "Nintendo",
+    "Genre": "Fighting",
+    "URL": "https://images.nintendolife.com/e73c33341ad6b/smashbros.large.jpg"
+  },
+  "DiabloIII": {
+    "Nom simple": "Diablo",
+    "Reste du nom": "III",
+    "Dérivés du nom": "Diablo III",
+    "Date de sortie": "2012-05-15",
+    "Nom du studio": "Blizzard Entertainment",
+    "Genre": "RPG",
+    "URL": "https://static1.srcdn.com/wordpress/wp-content/uploads/2019/11/Diablo-4-Screenshots-4K-Gameplay-Blizzard-Druid-Sorcerer-Barbarian.jpg"
+  },
+  "MarioKart8Deluxe": {
+    "Nom simple": "Mario Kart",
+    "Reste du nom": "8 Deluxe",
+    "Dérivés du nom": "Mario Kart 8 Deluxe",
+    "Date de sortie": "2017-04-28",
+    "Nom du studio": "Nintendo",
+    "Genre": "Racing",
+    "URL": "https://ricedigital.co.uk/wp-content/uploads/2017/05/Mario-Kart-8-Deluxe-Review-1.jpg"
+  },
+  "Destiny2": {
+    "URL": "https://images.squarespace-cdn.com/content/v1/55ef0e29e4b099e22cdc9eea/1508902021809-SI1JI0HV5WHDEWOTMCBI/Destiny+2+Screenshot+2017.10.24+-+20.58.40.80.jpg",
+    "Nom simple": "Destiny",
+    "Reste du nom": "2",
+    "Dérivés du nom": "Destiny 2",
+    "Date de sortie": "2017-09-06",
+    "Nom du studio": "Bungie",
+    "Genre": "FPS"
+  }
+}
+
