@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
@@ -11,7 +11,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import * as XLSX from 'xlsx';
 
-
+// Attention, enlever la vérification des majuscules !!
 
 export default function NormalPlay({navigation}) {
 
@@ -19,6 +19,11 @@ export default function NormalPlay({navigation}) {
   const [Cross1Opacity, setCross1Opacity] = useState(0)
   const [Cross2Opacity, setCross2Opacity] = useState(0)
   const [Cross3Opacity, setCross3Opacity] = useState(0)
+  const intervalRef = useRef(null);
+
+  const [Timer, setTimer] = useState(40)
+
+  const [ListeNombreAleatoireState, setListeNombreAleatoireState] = useState([])
 
   const [GameInput, setGameInput] = useState('')
 
@@ -28,22 +33,35 @@ export default function NormalPlay({navigation}) {
 
   const TailledeBasedonnée = Basedonnéeconvertie.length
 
-  function generateUniqueRandomListeNombreAleatorire(TailledeBasedonnée) { //code chat GPT qui permet de générer l'array de l'ordre des questions
-    const ListeNombreAleatorire = Array.from({ length: TailledeBasedonnée + 1 }, (v, k) => k);
-    for (let i = ListeNombreAleatorire.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [ListeNombreAleatorire[i], ListeNombreAleatorire[j]] = [ListeNombreAleatorire[j], ListeNombreAleatorire[i]];
-    }
-    return ListeNombreAleatorire
+
+  let ListeNombreAleatoire = []
+
+  function TimerFunction () {
+
+    intervalRef.current = setInterval(() => {
+      setTimer(Timer => Timer - 1);
+    }, 1000);
   }
-  generateUniqueRandomListeNombreAleatorire(TailledeBasedonnée)
+  
+  useEffect(() => {
+    ListeNombreAleatoire = Array.from({ length: TailledeBasedonnée + 1 }, (v, k) => k); //code chat GPT qui permet de générer l'array de l'ordre des questions
+    for (let i = ListeNombreAleatoire.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [ListeNombreAleatoire[i], ListeNombreAleatoire[j]] = [ListeNombreAleatoire[j], ListeNombreAleatoire[i]];
+    }
 
-  console.log(Basedonnéeconvertie[jeuActuel][1]['Nom simple'] + 'nom simple ')
+    setListeNombreAleatoireState(ListeNombreAleatoire)
+  }, []);
 
+
+  //console.log(ListeNombreAleatoireState[jeuActuel])
+
+  console.log(Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple'] + 'nom simple ')
 
   function BonJeuouPas () {
-    if (GameInput == Basedonnéeconvertie[jeuActuel][1]['Nom simple']){
-      return null
+    if (GameInput === Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple']){
+      setjeuActuel(jeuActuel => jeuActuel + 1)
+      clearInterval(intervalRef.current);
     }else{
       if(Cross1Opacity == 0){
         setCross1Opacity(1)
@@ -53,8 +71,15 @@ export default function NormalPlay({navigation}) {
         }else{
           if (Cross3Opacity == 0){
             setCross3Opacity(1)
-          }else{
-            console.log('trois erreur')
+            clearInterval(intervalRef.current);
+
+            setTimeout(() => {
+              setjeuActuel(jeuActuel => jeuActuel + 1)
+              setCross1Opacity(0)
+              setCross2Opacity(0)
+              setCross3Opacity(0)
+              setGameInput('')
+          }, 800);
           }
         }
       }
@@ -63,20 +88,16 @@ export default function NormalPlay({navigation}) {
     }
   }
 
-  
-
-  
-
   return (
     <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={{marginBottom: '2%'}}>0:29</Text>
+          <Text style={{marginBottom: '2%'}}>0: </Text>
           <Progress.Bar progress={0.3} width={scale(100)} height={verticalScale(8)} style={{marginBottom: '15%', borderColor: 'grey'}} color='red'/>
         </View>
         <View style={styles.viewButtonMiddle}>
             <Image
-                source={{ uri: Basedonnéeconvertie[jeuActuel][1]['Nom simple'] }}
-                style={{ width: scale(320), height: verticalScale(170), marginBottom: '5%'}} // Taille de l'image
+                source={{ uri: Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['URL'] }}
+                style={{ width: scale(320), height: verticalScale(170), marginBottom: '5%', borderRadius: 12}} // Taille de l'image
             />
             <View style={{flexDirection: 'row'}}>
               <View style={styles.textInputGame}>
