@@ -1,9 +1,13 @@
+
+
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 import { scale, verticalScale } from 'react-native-size-matters';
 
 export default function Menu({navigation}) {
+
   return (
     <View style={styles.container}>
         <View style={styles.top}>

@@ -1,9 +1,20 @@
+import { useEffect, useState, useRef} from 'react';
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 import { scale, verticalScale } from 'react-native-size-matters';
 
 export default function GameScreenChoice({navigation}) {
+  
+  useEffect(() => {
+
+    console.log('useEffect Menu lancé')
+
+
+
+  }, []);
+
   return (
     <View style={styles.container}>
         <View style={styles.header}>

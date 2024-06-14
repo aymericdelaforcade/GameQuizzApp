@@ -8,10 +8,24 @@ import { scale, verticalScale } from 'react-native-size-matters';
 import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
+
 
 import * as XLSX from 'xlsx';
 
 // Attention, enlever la vérification des majuscules !!
+
+//Tiny 5 font
 
 export default function NormalPlay({navigation}) {
 
@@ -21,26 +35,79 @@ export default function NormalPlay({navigation}) {
   const [Cross3Opacity, setCross3Opacity] = useState(0)
   const intervalRef = useRef(null);
 
-  const [Timer, setTimer] = useState(40)
-
-  const [ListeNombreAleatoireState, setListeNombreAleatoireState] = useState([])
-
   const [GameInput, setGameInput] = useState('')
 
+  const [ImageisLoad, setImageisLoad] = useState(false)
+
+  const [Timer, setTimer] = useState(30) //Tous les state du Timer
+  const [TimerText, setTimerText] = useState(30)
+  const [Entre10et0sec, setEntre10et0sec] = useState(null) //pour rajouter un 0 pour l'affichage
+
+  const [NombreJeualaSuite, setNombreJeualaSuite] = useState(0)
+  const [RevelationJeu, setRevelationJeu] = useState(0) //Opacity du texte en bas là
+  const [ImageOpacity, setImageOpacity] = useState(1) //Opacity de l'image du jeu
+
+
+  const [ListeNombreAleatoireState, setListeNombreAleatoireState] = useState([])
   const BaseDonnée = require('../assets/BaseDonnée1.json')
-
   const Basedonnéeconvertie = Object.entries(BaseDonnée);
-
   const TailledeBasedonnée = Basedonnéeconvertie.length
-
-
   let ListeNombreAleatoire = []
+
+  function GuessReussi(){
+    setTimer(30)
+    setTimerText(30)
+    setEntre10et0sec(null)
+    setNombreJeualaSuite(ancien => ancien +1)
+  }
+
+  function GuessRaté(){ 
+    setTimer(0)
+    setTimerText(0)
+    setEntre10et0sec(0)
+    setImageOpacity(0.6)
+    setRevelationJeu(1)
+    clearInterval(intervalRef.current);
+  }
+
+
 
   function TimerFunction () {
 
     intervalRef.current = setInterval(() => {
-      setTimer(Timer => Timer - 1);
+      if (Timer > 0){
+        setTimer(Timer => Timer - 0.5);
+      }
+    }, 500);
+
+    intervalRef.current = setInterval(() => {
+      setTimerText(prevTimer => {
+        if (prevTimer > 0) {
+          if (prevTimer < 11){
+            setEntre10et0sec(0)
+          }
+          return prevTimer - 1;
+        } else {
+          GuessRaté()
+          clearInterval(intervalRef.current);
+          return 0;
+        }
+      });
     }, 1000);
+  }
+
+  function NextGame(){
+    setImageOpacity(1)
+    setRevelationJeu(0)
+    clearInterval(intervalRef.current);
+    setCross1Opacity(0)
+    setCross2Opacity(0)
+    setCross3Opacity(0)
+    setjeuActuel(jeuActuel => jeuActuel + 1)
+    setTimer(30)
+    setTimerText(30)
+    setEntre10et0sec(null)
+    TimerFunction()
   }
   
   useEffect(() => {
@@ -51,17 +118,15 @@ export default function NormalPlay({navigation}) {
     }
 
     setListeNombreAleatoireState(ListeNombreAleatoire)
+
+    setImageisLoad(true)
+    TimerFunction()
   }, []);
 
 
-  //console.log(ListeNombreAleatoireState[jeuActuel])
-
-  console.log(Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple'] + 'nom simple ')
-
   function BonJeuouPas () {
     if (GameInput === Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple']){
-      setjeuActuel(jeuActuel => jeuActuel + 1)
-      clearInterval(intervalRef.current);
+      GuessReussi()
     }else{
       if(Cross1Opacity == 0){
         setCross1Opacity(1)
@@ -71,15 +136,7 @@ export default function NormalPlay({navigation}) {
         }else{
           if (Cross3Opacity == 0){
             setCross3Opacity(1)
-            clearInterval(intervalRef.current);
-
-            setTimeout(() => {
-              setjeuActuel(jeuActuel => jeuActuel + 1)
-              setCross1Opacity(0)
-              setCross2Opacity(0)
-              setCross3Opacity(0)
-              setGameInput('')
-          }, 800);
+            GuessRaté()
           }
         }
       }
@@ -91,14 +148,16 @@ export default function NormalPlay({navigation}) {
   return (
     <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={{marginBottom: '2%'}}>0: </Text>
-          <Progress.Bar progress={0.3} width={scale(100)} height={verticalScale(8)} style={{marginBottom: '15%', borderColor: 'grey'}} color='red'/>
+          <Text style={{marginBottom: '2%', color: 'white'}}>0:{Entre10et0sec}{TimerText}</Text>
+          <Progress.Bar progress={Timer / 30} width={scale(100)} height={verticalScale(8)} style={{marginBottom: '7%', borderColor: 'grey'}} color='red'/>
+          <Text style={{fontSize: 70 , fontFamily: 'SkiSilkscreen'}}>{NombreJeualaSuite}</Text>
         </View>
         <View style={styles.viewButtonMiddle}>
-            <Image
+            {ImageisLoad && <Image
                 source={{ uri: Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['URL'] }}
-                style={{ width: scale(320), height: verticalScale(170), marginBottom: '5%', borderRadius: 12}} // Taille de l'image
-            />
+                style={{ width: scale(320), height: verticalScale(170), marginBottom: '5%', borderRadius: 12, opacity: ImageOpacity}} // Taille de l'image
+            />}
+            {! ImageisLoad && <PacmanIndicator color='white' size={55} />}
             <View style={{flexDirection: 'row'}}>
               <View style={styles.textInputGame}>
                   <TextInput 
@@ -121,8 +180,12 @@ export default function NormalPlay({navigation}) {
                 <View style={styles.unboxEssai}><Entypo name="cross" color={'red'} size={25} style={{opacity: Cross3Opacity}}/></View>
             </View>
         </View>
-
-        <View style={styles.bottomview}></View>
+        <View style={styles.bottomview}>
+          <TouchableOpacity style={[styles.boutonSuivant, {opacity: RevelationJeu}]} onPress={() => NextGame()}>
+            <Text style={{color: 'black'}}>Next</Text>
+          </TouchableOpacity>
+        </View>
+        {ImageisLoad && <View style={styles.viewRevelationText}><Text style={{opacity: RevelationJeu, fontSize: 35, textAlign: 'center', fontFamily:'Anton'}}>{Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Dérivés du nom'] }</Text></View>}
         <StatusBar style="auto" />
     </View>
   );
@@ -145,7 +208,7 @@ const styles = StyleSheet.create({
   header:{
     flex: 1.2,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   textInputGame:{
@@ -199,5 +262,31 @@ const styles = StyleSheet.create({
 
   bottomview: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  boutonSuivant:{
+    height: verticalScale(43),
+    width: scale(260),
+    backgroundColor:'#bb86fc',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: '1%',
+    marginTop: '10%',
+    borderRadius: 10,
+    borderWidth: 0.5,
+  },
+
+  viewRevelationText:{
+    position: 'absolute', 
+    top: '33%', 
+    left:'15%',
+    marginBottom: '15%',
+    width: scale(250),
+    height: verticalScale(150),
+    justifyContent: 'center',
+    alignItems:'center'
   }
+
 });

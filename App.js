@@ -1,5 +1,7 @@
+import React, { useReducer, useEffect } from 'react';
+
 import 'react-native-gesture-handler';
-import React, { useReducer } from 'react';
+
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
@@ -10,7 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Menu from './screens/Menu';
 import { NavigationContainer } from '@react-navigation/native';
 import setDefaultProps from 'react-native-simple-default-props'
-import {useEffect, useState} from 'react';
+
 
 import * as Font from 'expo-font';
 import GameScreenChoice from './screens/GameScreenChoice';
@@ -28,9 +30,12 @@ export default function App() {
   const [fontsLoaded, setFontsLoaded] = React.useState(false);
 
   useEffect(() => {
+
     async function loadFonts() {
       await Font.loadAsync({
         'PoppinsBlack': require('./assets/fonts/Montserrat-Medium.ttf'),
+        'SkiSilkscreen': require ('./assets/fonts/Silkscreen-Regular.ttf'),
+        'Anton': require('./assets/fonts/Anton-Regular.ttf'),
       })
       .then(() => {
         setDefaultProps(Text, { style: [{ fontFamily: 'PoppinsBlack', color: '#FFFFFF'}], });
@@ -44,7 +49,6 @@ export default function App() {
     }
 
     loadFonts();
-
   }, []);
 
 
