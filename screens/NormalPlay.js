@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, useRef} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, KeyboardAvoidingView, Keyboard} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { scale, verticalScale } from 'react-native-size-matters';
 
 import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import {
   BallIndicator,
@@ -22,6 +23,7 @@ import {
 
 
 import * as XLSX from 'xlsx';
+import { retry } from '@reduxjs/toolkit/query';
 
 // Attention, enlever la vérification des majuscules !!
 
@@ -46,6 +48,8 @@ export default function NormalPlay({navigation}) {
   const [NombreJeualaSuite, setNombreJeualaSuite] = useState(0)
   const [RevelationJeu, setRevelationJeu] = useState(0) //Opacity du texte en bas là
   const [ImageOpacity, setImageOpacity] = useState(1) //Opacity de l'image du jeu
+  const [DeafeatScreen, setDefeatScreen] = useState(false)
+  const [BonGuessCheck, setBonGuessCheck] = useState(false)
 
 
   const [ListeNombreAleatoireState, setListeNombreAleatoireState] = useState([])
@@ -55,20 +59,31 @@ export default function NormalPlay({navigation}) {
   let ListeNombreAleatoire = []
 
   function GuessReussi(){
-    setTimer(30)
-    setTimerText(30)
-    setEntre10et0sec(null)
-    setNombreJeualaSuite(ancien => ancien +1)
-  }
-
-  function GuessRaté(){ 
+    setBonGuessCheck(true)
+    Keyboard.dismiss()
+    clearInterval(intervalRef.current);
     setTimer(0)
     setTimerText(0)
     setEntre10et0sec(0)
     setImageOpacity(0.6)
     setRevelationJeu(1)
+    setGameInput('')
+    setNombreJeualaSuite(ancien => ancien +1)
+  }
+
+  function GuessRaté(){ 
+    setBonGuessCheck(false)
+    Keyboard.dismiss()
+    setTimer(0)
+    setTimerText(0)
+    setEntre10et0sec(0)
+    setImageOpacity(0.6)
+    setRevelationJeu(1)
+    setGameInput('')
     clearInterval(intervalRef.current);
   }
+
+
 
 
 
@@ -97,6 +112,29 @@ export default function NormalPlay({navigation}) {
   }
 
   function NextGame(){
+    if (BonGuessCheck == false){
+      setDefeatScreen(true)
+      
+    }else{
+      setBonGuessCheck(false)
+      setDefeatScreen(false)
+      setImageOpacity(1)
+      setRevelationJeu(0)
+      clearInterval(intervalRef.current);
+      setCross1Opacity(0)
+      setCross2Opacity(0)
+      setCross3Opacity(0)
+      setjeuActuel(jeuActuel => jeuActuel + 1)
+      setTimer(30)
+      setTimerText(30)
+      setEntre10et0sec(null)
+      TimerFunction()
+    }
+  }
+
+  function RetryFunction (){
+    setBonGuessCheck(false)
+    setDefeatScreen(false)
     setImageOpacity(1)
     setRevelationJeu(0)
     clearInterval(intervalRef.current);
@@ -107,7 +145,7 @@ export default function NormalPlay({navigation}) {
     setTimer(30)
     setTimerText(30)
     setEntre10et0sec(null)
-    TimerFunction()
+    TimerFunction()  
   }
   
   useEffect(() => {
@@ -125,7 +163,7 @@ export default function NormalPlay({navigation}) {
 
 
   function BonJeuouPas () {
-    if (GameInput === Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple']){
+    if (GameInput.toLowerCase() === Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple'].toLowerCase()){
       GuessReussi()
     }else{
       if(Cross1Opacity == 0){
@@ -152,7 +190,7 @@ export default function NormalPlay({navigation}) {
           <Progress.Bar progress={Timer / 30} width={scale(100)} height={verticalScale(8)} style={{marginBottom: '7%', borderColor: 'grey'}} color='red'/>
           <Text style={{fontSize: 70 , fontFamily: 'SkiSilkscreen'}}>{NombreJeualaSuite}</Text>
         </View>
-        <View style={styles.viewButtonMiddle}>
+        <KeyboardAvoidingView enabled={false} style={styles.viewButtonMiddle}>
             {ImageisLoad && <Image
                 source={{ uri: Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['URL'] }}
                 style={{ width: scale(320), height: verticalScale(170), marginBottom: '5%', borderRadius: 12, opacity: ImageOpacity}} // Taille de l'image
@@ -179,14 +217,26 @@ export default function NormalPlay({navigation}) {
                 <View style={styles.unboxEssai}><Entypo name="cross" color={'red'} size={25} style={{opacity: Cross2Opacity}}/></View>
                 <View style={styles.unboxEssai}><Entypo name="cross" color={'red'} size={25} style={{opacity: Cross3Opacity}}/></View>
             </View>
-        </View>
+        </KeyboardAvoidingView>
         <View style={styles.bottomview}>
           <TouchableOpacity style={[styles.boutonSuivant, {opacity: RevelationJeu}]} onPress={() => NextGame()}>
             <Text style={{color: 'black'}}>Next</Text>
           </TouchableOpacity>
         </View>
-        {ImageisLoad && <View style={styles.viewRevelationText}><Text style={{opacity: RevelationJeu, fontSize: 35, textAlign: 'center', fontFamily:'Anton'}}>{Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Dérivés du nom'] }</Text></View>}
+        {ImageisLoad && <View style={styles.viewRevelationText}>
+            <Text style={{opacity: RevelationJeu, fontSize: 35, textAlign: 'center', fontFamily:'Anton'}}>
+              {Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Dérivés du nom'] }
+            </Text>
+            {BonGuessCheck && <Entypo name="check" color={'#7CFF00'} size={40} style={{opacity: RevelationJeu}}/>}
+          </View>}
         <StatusBar style="auto" />
+        { DeafeatScreen && <View style={styles.OverlayDefaite}>
+          <Text style={{fontSize: 35, fontFamily: 'Anton'}}>Wrong Guess !</Text>
+          <TouchableOpacity style={styles.TouchableOpacityDeuxIconsWrongGuess}>
+            <Ionicons name="refresh" color={'white'} size={40} onPress={() => RetryFunction()}/>
+            <AntDesign name="arrowright" color={'white'} size={40} onPress={() => navigation.navigate('FinalScreenNormalPlay')}/>
+          </TouchableOpacity>
+        </View>}
     </View>
   );
 }
@@ -287,6 +337,24 @@ const styles = StyleSheet.create({
     height: verticalScale(150),
     justifyContent: 'center',
     alignItems:'center'
+  },
+
+  OverlayDefaite: {
+    flex: 1,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'grey',
+    opacity: 0.95,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  TouchableOpacityDeuxIconsWrongGuess:{
+    marginTop: '5%', 
+    flexDirection: 'row', 
+    width: scale(150), 
+    justifyContent: 'space-evenly'
   }
 
 });

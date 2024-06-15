@@ -17,6 +17,7 @@ import setDefaultProps from 'react-native-simple-default-props'
 import * as Font from 'expo-font';
 import GameScreenChoice from './screens/GameScreenChoice';
 import NormalPlay from './screens/NormalPlay';
+import FinalScreenNormalPlay from './screens/FinalScreenNormalPlay';
 
 
 const Stack = createStackNavigator();
@@ -58,6 +59,7 @@ export default function App() {
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="GameScreenChoice" component={GameScreenChoice} />
         <Stack.Screen name="Normal Play" component={NormalPlay} />
+        <Stack.Screen name="FinalScreenNormalPlay" component={FinalScreenNormalPlay} />
       </Stack.Navigator>
     </NavigationContainer>
   );
