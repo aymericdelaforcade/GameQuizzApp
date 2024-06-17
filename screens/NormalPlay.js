@@ -8,6 +8,7 @@ import { scale, verticalScale } from 'react-native-size-matters';
 import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import {
   BallIndicator,
@@ -50,6 +51,7 @@ export default function NormalPlay({navigation}) {
   const [ImageOpacity, setImageOpacity] = useState(1) //Opacity de l'image du jeu
   const [DeafeatScreen, setDefeatScreen] = useState(false)
   const [BonGuessCheck, setBonGuessCheck] = useState(false)
+  const [Retry, setretry]  = useState(0)
 
 
   const [ListeNombreAleatoireState, setListeNombreAleatoireState] = useState([])
@@ -129,10 +131,18 @@ export default function NormalPlay({navigation}) {
       setTimerText(30)
       setEntre10et0sec(null)
       TimerFunction()
+      
     }
   }
 
-  function RetryFunction (){
+  useEffect(() => {
+    if (ImageisLoad == true){
+      //console.log(Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple'] )
+    }
+  },[jeuActuel])
+
+  function ContinueFunction (){
+    setjeuActuel(jeuActuel => jeuActuel + 1)
     setBonGuessCheck(false)
     setDefeatScreen(false)
     setImageOpacity(1)
@@ -141,7 +151,25 @@ export default function NormalPlay({navigation}) {
     setCross1Opacity(0)
     setCross2Opacity(0)
     setCross3Opacity(0)
-    setjeuActuel(jeuActuel => jeuActuel + 1)
+    setjeuActuel(0)
+    setTimer(30)
+    setTimerText(30)
+    setEntre10et0sec(null)
+    TimerFunction()  
+  }
+
+  function Retryfunction(){
+    setretry(retry => retry + 1)
+    setjeuActuel(0)
+    setBonGuessCheck(false)
+    setDefeatScreen(false)
+    setImageOpacity(1)
+    setRevelationJeu(0)
+    clearInterval(intervalRef.current);
+    setCross1Opacity(0)
+    setCross2Opacity(0)
+    setCross3Opacity(0)
+    setjeuActuel(0)
     setTimer(30)
     setTimerText(30)
     setEntre10et0sec(null)
@@ -159,11 +187,20 @@ export default function NormalPlay({navigation}) {
 
     setImageisLoad(true)
     TimerFunction()
-  }, []);
+  }, [Retry]);
 
 
   function BonJeuouPas () {
-    if (GameInput.toLowerCase() === Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple'].toLowerCase()){
+
+    const nomSimple = Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple'].toLowerCase().replace(/\s+/g, '')
+    const BonJeuxSimples = nomSimple.split(';').map(nom => nom.trim());
+
+    const nomCompliqué = Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Dérivés du nom'].toLowerCase().replace(/\s+/g, '')
+    const BonJeuxCompliqués = nomCompliqué.split(';').map(nom => nom.trim());
+
+    if (BonJeuxSimples.includes(GameInput.toLowerCase().replace(/\s+/g, '')) ||
+      BonJeuxCompliqués.includes(GameInput.toLowerCase().replace(/\s+/g, ''))
+    ){
       GuessReussi()
     }else{
       if(Cross1Opacity == 0){
@@ -188,7 +225,11 @@ export default function NormalPlay({navigation}) {
         <View style={styles.header}>
           <Text style={{marginBottom: '2%', color: 'white'}}>0:{Entre10et0sec}{TimerText}</Text>
           <Progress.Bar progress={Timer / 30} width={scale(100)} height={verticalScale(8)} style={{marginBottom: '7%', borderColor: 'grey'}} color='red'/>
-          <Text style={{fontSize: 70 , fontFamily: 'SkiSilkscreen'}}>{NombreJeualaSuite}</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{fontSize: 70 , fontFamily: 'SkiSilkscreen'}}>{NombreJeualaSuite}</Text>
+            <Text style={{fontSize: 70 , fontFamily: 'SkiSilkscreen'}}>-</Text>
+            <Text style={{fontSize: 70 , fontFamily: 'SkiSilkscreen', color: '#FFD700'}}>14</Text>
+          </View>
         </View>
         <KeyboardAvoidingView enabled={false} style={styles.viewButtonMiddle}>
             {ImageisLoad && <Image
@@ -225,17 +266,23 @@ export default function NormalPlay({navigation}) {
         </View>
         {ImageisLoad && <View style={styles.viewRevelationText}>
             <Text style={{opacity: RevelationJeu, fontSize: 35, textAlign: 'center', fontFamily:'Anton'}}>
-              {Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Dérivés du nom'] }
+              {Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Dérivés du nom'].split(';')[0].trim()}
             </Text>
             {BonGuessCheck && <Entypo name="check" color={'#7CFF00'} size={40} style={{opacity: RevelationJeu}}/>}
           </View>}
         <StatusBar style="auto" />
         { DeafeatScreen && <View style={styles.OverlayDefaite}>
           <Text style={{fontSize: 35, fontFamily: 'Anton'}}>Wrong Guess !</Text>
-          <TouchableOpacity style={styles.TouchableOpacityDeuxIconsWrongGuess}>
-            <Ionicons name="refresh" color={'white'} size={40} onPress={() => RetryFunction()}/>
-            <AntDesign name="arrowright" color={'white'} size={40} onPress={() => navigation.navigate('FinalScreenNormalPlay')}/>
-          </TouchableOpacity>
+          <View style={styles.TouchableOpacityDeuxIconsWrongGuess}>
+            <MaterialCommunityIcons name="cards-heart" color={'white'} size={50}  onPress={() => ContinueFunction()}/>
+            <Ionicons name="refresh" color={'white'} size={50} onPress={() => Retryfunction()}/>
+            <AntDesign name="arrowright" color={'white'} size={50} onPress={() => navigation.navigate('FinalScreenNormalPlay', {ListeNombreAleatoireState, jeuActuel})}/>
+          </View>
+          <View style={styles.TouchableOpacityTextWrongGuess}>
+              <Text style={styles.troisTextDefeatScreen}>Continue</Text>
+              <Text style={[styles.troisTextDefeatScreen, {marginLeft: '5%'}]}>Retry</Text>
+              <Text style={styles.troisTextDefeatScreen}> View results</Text>
+          </View>
         </View>}
     </View>
   );
@@ -353,8 +400,24 @@ const styles = StyleSheet.create({
   TouchableOpacityDeuxIconsWrongGuess:{
     marginTop: '5%', 
     flexDirection: 'row', 
-    width: scale(150), 
-    justifyContent: 'space-evenly'
+    width: scale(200), 
+    justifyContent: 'space-evenly',
+    paddingBottom: 0,
+    marginBottom: 0
+  },
+
+  TouchableOpacityTextWrongGuess:{
+    marginTop: '1%', 
+    flexDirection: 'row', 
+    width: scale(200), 
+    justifyContent: 'space-evenly',
+    paddingBottom: 0,
+    marginBottom: 0
+  },
+
+
+  troisTextDefeatScreen:{
+    fontSize: 10,
   }
 
 });

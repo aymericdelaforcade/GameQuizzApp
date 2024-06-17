@@ -1,10 +1,12 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 
 import 'react-native-gesture-handler';
 
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+
+import setupAPIClient from './api';
 
 import { scale, verticalScale } from 'react-native-size-matters';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -26,6 +28,23 @@ const Stack = createStackNavigator();
 
 
 export default function App() {
+
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        const api = await setupAPIClient();
+        const response = await api.post('games', 'fields *; limit 10;');
+        setGames(response.data);
+        console.log(JSON.stringify(response.data, null, 2) + '  data jeux')
+      } catch (error) {
+        console.error('Error fetching games:', error);
+      }
+    };
+
+    fetchGames();
+  }, []);
 
 
   const [fontsLoaded, setFontsLoaded] = React.useState(false);
