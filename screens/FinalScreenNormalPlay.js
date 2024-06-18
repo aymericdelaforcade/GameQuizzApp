@@ -16,8 +16,7 @@ export default function FinalScreenNormalPlay({ route, navigation }) {
   const [AucunjeuTrouvéState, setAucunjeuTrouvéState] = useState(false)
 
   const ListeJeuTrouveCoupée = ListeJeuTrouveOrdre.slice(0,JeuMaxTrouvé)
-  const BaseDonnée = require('../assets/BaseDonnée1.json')
-  const Basedonnéeconvertie = Object.entries(BaseDonnée);
+  const Basedonnéeconvertie = require('../assets/BaseDonnée1.json')
 
   useEffect(() => {
     setnbJeuxTrouvés(ListeJeuTrouveCoupée.length)
@@ -28,31 +27,31 @@ export default function FinalScreenNormalPlay({ route, navigation }) {
 
   const renderItem = ({item}) => { //Ce que rend la flat list qui gère la liste des matière
 
-    const jeuActuelTrouvé = Basedonnéeconvertie[item][1]['Nom simple']
+    const jeuActuelTrouvé = Basedonnéeconvertie[item]['name']
 
       return(
       <View style={{flexDirection: 'row', width: scale(350), backgroundColor: '#474747', padding: '1%', paddingTop: '2%', marginTop: '2%'}}>
           <View style={{ flex: 1}}>
             <Image
-                source={{ uri: Basedonnéeconvertie[item][1]['URL'] }}
+                source={{ uri: "https://images.igdb.com/igdb/image/upload/t_original/" + Basedonnéeconvertie[item]['screenshots'][0] + ".jpg"}}
                 style={{ width: scale(180), height: verticalScale(110), marginBottom: '5%', borderRadius: 12, marginTop: '2%'}} // Taille de l'image
             />
           </View>
           <View style={{alignItems: 'center', justifyContent: 'flex-start', flex: 0.8}}>
             <View style={{flex: 10}}>
-              <Text style={{fontFamily:'PoppinsBlack', fontWeight: 'bold', fontSize: 20, textAlign: 'center', marginBottom: '7%'}}>{Basedonnéeconvertie[item][1]['Dérivés du nom'].split(';')[0].trim()}</Text>
+              <Text style={{fontFamily:'PoppinsBlack', fontWeight: 'bold', fontSize: 20, textAlign: 'center', marginBottom: '7%'}}>{Basedonnéeconvertie[item]['name']}</Text>
             </View>
             <View style={styles.viewStudioetDateJeu}>
               <Text style={{fontFamily:'PoppinsBlack', fontWeight: 'bold', fontSize: 17, lineHeight: 19}}>Sudio:</Text>
-              <Text style={{fontFamily:'PoppinsBlack'}}>{Basedonnéeconvertie[item][1]['Nom du studio']}</Text>
+              <Text style={{fontFamily:'PoppinsBlack'}}>{Basedonnéeconvertie[item]['release_dates'][0].y}</Text>
             </View>
             <View style={styles.viewStudioetDateJeu}>
               <Text style={{fontFamily:'PoppinsBlack', fontWeight: 'bold', fontSize: 17, lineHeight: 21}}>Date:</Text>
-              <Text style={{fontFamily:'PoppinsBlack'}}>{Basedonnéeconvertie[item][1]['Date de sortie']}</Text>
+              <Text style={{fontFamily:'PoppinsBlack'}}>{Basedonnéeconvertie[item]['release_dates'][0].y}</Text>
             </View>
             <View style={[styles.viewStudioetDateJeu,  {marginBottom: '18%'}]}>
               <Text style={{fontFamily:'PoppinsBlack', fontWeight: 'bold', fontSize: 17, lineHeight: 21}}>Genre:</Text>
-              <Text style={{fontFamily:'PoppinsBlack'}} numberOfLines={2} adjustsFontSizeToFit={true}>{Basedonnéeconvertie[item][1]['Genre']}</Text>
+              <Text style={{fontFamily:'PoppinsBlack'}} numberOfLines={2} adjustsFontSizeToFit={true}>{Basedonnéeconvertie[item]['screenshots'][0].y}</Text>
             </View>
           </View>
 

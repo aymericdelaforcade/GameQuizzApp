@@ -5,10 +5,14 @@ import { TextInput } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { scale, verticalScale } from 'react-native-size-matters';
 
+import SwipeableViews from 'react-swipeable-views-native/lib/SwipeableViews.scroll'
+
 import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
+import { PageIndicator } from 'react-native-page-indicator';
 
 import {
   BallIndicator,
@@ -21,6 +25,8 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
+
+
 
 
 import * as XLSX from 'xlsx';
@@ -37,13 +43,14 @@ export default function NormalPlay({navigation}) {
   const [Cross2Opacity, setCross2Opacity] = useState(0)
   const [Cross3Opacity, setCross3Opacity] = useState(0)
   const intervalRef = useRef(null);
+  const [currentPage, setcurrentPage] = useState(0)
 
   const [GameInput, setGameInput] = useState('')
 
   const [ImageisLoad, setImageisLoad] = useState(false)
 
-  const [Timer, setTimer] = useState(30) //Tous les state du Timer
-  const [TimerText, setTimerText] = useState(30)
+  const [Timer, setTimer] = useState(50) //Tous les state du Timer
+  const [TimerText, setTimerText] = useState(50)
   const [Entre10et0sec, setEntre10et0sec] = useState(null) //pour rajouter un 0 pour l'affichage
 
   const [NombreJeualaSuite, setNombreJeualaSuite] = useState(0)
@@ -51,14 +58,17 @@ export default function NormalPlay({navigation}) {
   const [ImageOpacity, setImageOpacity] = useState(1) //Opacity de l'image du jeu
   const [DeafeatScreen, setDefeatScreen] = useState(false)
   const [BonGuessCheck, setBonGuessCheck] = useState(false)
-  const [Retry, setretry]  = useState(0)
+  const [Retry, setretry]  = useState(0) //permet de lancer le useEffect qui va regénérer l'aléatoirité des jeux
+
+  const[Variablepourtest, setVariablepourtest] = useState(false)
 
 
   const [ListeNombreAleatoireState, setListeNombreAleatoireState] = useState([])
-  const BaseDonnée = require('../assets/BaseDonnée1.json')
-  const Basedonnéeconvertie = Object.entries(BaseDonnée);
+  const Basedonnéeconvertie = require('../assets/BaseDonnée1.json')
   const TailledeBasedonnée = Basedonnéeconvertie.length
   let ListeNombreAleatoire = []
+
+  
 
   function GuessReussi(){
     setBonGuessCheck(true)
@@ -106,7 +116,7 @@ export default function NormalPlay({navigation}) {
           return prevTimer - 1;
         } else {
           GuessRaté()
-          clearInterval(intervalRef.current);
+          //clearInterval(intervalRef.current);
           return 0;
         }
       });
@@ -118,6 +128,7 @@ export default function NormalPlay({navigation}) {
       setDefeatScreen(true)
       
     }else{
+      setcurrentPage(0)
       setBonGuessCheck(false)
       setDefeatScreen(false)
       setImageOpacity(1)
@@ -127,21 +138,22 @@ export default function NormalPlay({navigation}) {
       setCross2Opacity(0)
       setCross3Opacity(0)
       setjeuActuel(jeuActuel => jeuActuel + 1)
-      setTimer(30)
-      setTimerText(30)
+      setTimer(50)
+      setTimerText(50)
       setEntre10et0sec(null)
       TimerFunction()
       
     }
   }
 
-  useEffect(() => {
-    if (ImageisLoad == true){
-      //console.log(Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple'] )
-    }
-  },[jeuActuel])
+  useEffect(() => {  //codé lancé au unmount de l'écran (retour arrière) pour pas, si on revient dessus, provoquer de bugs
+    return () => {
+      setImageisLoad(false)
+  }
+  },[])
 
   function ContinueFunction (){
+    setcurrentPage(0)
     setjeuActuel(jeuActuel => jeuActuel + 1)
     setBonGuessCheck(false)
     setDefeatScreen(false)
@@ -152,13 +164,16 @@ export default function NormalPlay({navigation}) {
     setCross2Opacity(0)
     setCross3Opacity(0)
     setjeuActuel(0)
-    setTimer(30)
-    setTimerText(30)
+    setTimer(50)
+    setTimerText(50)
     setEntre10et0sec(null)
     TimerFunction()  
   }
 
   function Retryfunction(){
+    setImageisLoad(false)
+    setNombreJeualaSuite(0)
+    setcurrentPage(0)
     setretry(retry => retry + 1)
     setjeuActuel(0)
     setBonGuessCheck(false)
@@ -170,8 +185,8 @@ export default function NormalPlay({navigation}) {
     setCross2Opacity(0)
     setCross3Opacity(0)
     setjeuActuel(0)
-    setTimer(30)
-    setTimerText(30)
+    setTimer(50)
+    setTimerText(50)
     setEntre10et0sec(null)
     TimerFunction()  
   }
@@ -187,19 +202,37 @@ export default function NormalPlay({navigation}) {
 
     setImageisLoad(true)
     TimerFunction()
+
+    setVariablepourtest(true)
   }, [Retry]);
+
+  useEffect(() =>{
+    if (Variablepourtest == true){
+      // console.log('test d approche 3' + JSON.stringify(Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]]['screenshots'][Math.floor(Math.random() * Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]]['screenshots'].length)].image_id, null, 2) )
+    }
+  },[Variablepourtest])
+
+  
 
 
   function BonJeuouPas () {
 
-    const nomSimple = Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Nom simple'].toLowerCase().replace(/\s+/g, '')
-    const BonJeuxSimples = nomSimple.split(';').map(nom => nom.trim());
+    const nomSimple = Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]]['name'].toLowerCase().replace(/:/g, '')
+    const BonJeuxSimples = nomSimple.split(' ').map(nom => nom.trim()).filter(nom => nom.length > 0);
 
-    const nomCompliqué = Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Dérivés du nom'].toLowerCase().replace(/\s+/g, '')
-    const BonJeuxCompliqués = nomCompliqué.split(';').map(nom => nom.trim());
+    console.log(BonJeuxSimples + '  array bon jeux simples')
 
-    if (BonJeuxSimples.includes(GameInput.toLowerCase().replace(/\s+/g, '')) ||
-      BonJeuxCompliqués.includes(GameInput.toLowerCase().replace(/\s+/g, ''))
+    const BonJeuxCompliqués = Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]]['alternative_names'].map(nomDérivée => nomDérivée.name.toLowerCase().replace(/:/g, ''))
+    //const BonJeuxCompliqués = nomCompliqué.split(' ').map(nom => nom.trim()).filter(nom => nom.length > 0);
+
+    console.log(BonJeuxCompliqués + '  array bon jeux compliqués')
+
+    GameInputArray = GameInput.split(' ').map(nom => nom.trim().toLowerCase()).filter(nom => nom.length > 0);
+
+    console.log(GameInputArray + '  array game input')
+
+    if (BonJeuxSimples.some(jeuxsimples => GameInputArray.includes(jeuxsimples)) ||
+      BonJeuxCompliqués.some(jeuxcompliqué => GameInputArray.includes(jeuxcompliqué))
     ){
       GuessReussi()
     }else{
@@ -220,11 +253,13 @@ export default function NormalPlay({navigation}) {
     }
   }
 
+  
+
   return (
     <View style={styles.container}>
         <View style={styles.header}>
           <Text style={{marginBottom: '2%', color: 'white'}}>0:{Entre10et0sec}{TimerText}</Text>
-          <Progress.Bar progress={Timer / 30} width={scale(100)} height={verticalScale(8)} style={{marginBottom: '7%', borderColor: 'grey'}} color='red'/>
+          <Progress.Bar progress={Timer / 50} width={scale(100)} height={verticalScale(8)} style={{marginBottom: '7%', borderColor: 'grey'}} color='red'/>
           <View style={{flexDirection: 'row'}}>
             <Text style={{fontSize: 70 , fontFamily: 'SkiSilkscreen'}}>{NombreJeualaSuite}</Text>
             <Text style={{fontSize: 70 , fontFamily: 'SkiSilkscreen'}}>-</Text>
@@ -232,11 +267,19 @@ export default function NormalPlay({navigation}) {
           </View>
         </View>
         <KeyboardAvoidingView enabled={false} style={styles.viewButtonMiddle}>
-            {ImageisLoad && <Image
-                source={{ uri: Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['URL'] }}
-                style={{ width: scale(320), height: verticalScale(170), marginBottom: '5%', borderRadius: 12, opacity: ImageOpacity}} // Taille de l'image
-            />}
+            {ImageisLoad && 
+              <SwipeableViews style={styles.slideContainer} index={currentPage} onChangeIndex={(index) => {setcurrentPage(index)}}>
+              {Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]]['screenshots'].map((screenshot, index) => (
+                <View key={index}>
+                  <Image
+                      source={{ uri: "https://images.igdb.com/igdb/image/upload/t_original/" + screenshot.image_id + ".jpg" }}
+                      style={{ width: scale(340), height: verticalScale(170), marginBottom: '5%', borderRadius: 12, overflow: 'hidden' , opacity: ImageOpacity}} // Taille de l'image
+                  />
+                </View>))}
+                </SwipeableViews>
+              }
             {! ImageisLoad && <PacmanIndicator color='white' size={55} />}
+            {ImageisLoad &&<PageIndicator style={{marginBottom: '14%'}} activeColor='#bb86fc' size={10} color='white' count={Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]]['screenshots'].length} current={currentPage} />}
             <View style={{flexDirection: 'row'}}>
               <View style={styles.textInputGame}>
                   <TextInput 
@@ -266,7 +309,7 @@ export default function NormalPlay({navigation}) {
         </View>
         {ImageisLoad && <View style={styles.viewRevelationText}>
             <Text style={{opacity: RevelationJeu, fontSize: 35, textAlign: 'center', fontFamily:'Anton'}}>
-              {Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]][1]['Dérivés du nom'].split(';')[0].trim()}
+              {Basedonnéeconvertie[ListeNombreAleatoireState[jeuActuel]]['name']}
             </Text>
             {BonGuessCheck && <Entypo name="check" color={'#7CFF00'} size={40} style={{opacity: RevelationJeu}}/>}
           </View>}
